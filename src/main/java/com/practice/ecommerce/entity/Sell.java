@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class SellTransaction implements Serializable {
+public class Sell implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sellId;
@@ -15,19 +15,19 @@ public class SellTransaction implements Serializable {
     private int time;
     private int sumOfPrice;
 
-    @OneToMany( mappedBy = "sellTransaction", cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "sell", cascade = CascadeType.ALL)
     @JsonManagedReference
-    List<DetailedSellTransaction> detailedSellTransactions;
+    List<SellDetail> sellDetails;
 
-    public SellTransaction() {
+    public Sell() {
     }
 
-    public SellTransaction(long sellId, int date, int time, int sumOfPrice, List<DetailedSellTransaction> detailedSellTransactions) {
+    public Sell(long sellId, int date, int time, int sumOfPrice, List<SellDetail> sellDetails) {
         this.sellId = sellId;
         this.date = date;
         this.time = time;
         this.sumOfPrice = sumOfPrice;
-        this.detailedSellTransactions = detailedSellTransactions;
+        this.sellDetails = sellDetails;
     }
 
     public long getSellId() {
@@ -62,11 +62,11 @@ public class SellTransaction implements Serializable {
         this.sumOfPrice = sumOfPrice;
     }
 
-    public List<DetailedSellTransaction> getDetailedSellTransactions() {
-        return detailedSellTransactions;
+    public List<SellDetail> getSellDetails() {
+        return sellDetails;
     }
 
-    public void setDetailedSellTransactions(List<DetailedSellTransaction> detailedSellTransactions) {
-        this.detailedSellTransactions = detailedSellTransactions;
+    public void setSellDetails(List<SellDetail> sellDetails) {
+        this.sellDetails = sellDetails;
     }
 }

@@ -1,6 +1,6 @@
 package com.practice.ecommerce;
 
-import com.practice.ecommerce.entity.DetailedBuyTransaction;
+import com.practice.ecommerce.entity.BuyDetail;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,7 +9,7 @@ class EcommerceApplicationTests {
 
 	@Test
 	void test() {
-		DetailedBuyTransaction detailedBuyTransaction1 = new DetailedBuyTransaction();
+		BuyDetail buyDetail1 = new BuyDetail();
 	}
 
 }

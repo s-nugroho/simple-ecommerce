@@ -1,6 +1,5 @@
 package com.practice.ecommerce.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -8,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class BuyTransaction implements Serializable {
+public class Buy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long buyId;
@@ -16,19 +15,19 @@ public class BuyTransaction implements Serializable {
     private int time;
     private int sumOfPrice;
 
-    @OneToMany(mappedBy = "buyTransaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "buy", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<DetailedBuyTransaction> detailedBuyTransactions;
+    private List<BuyDetail> buyDetails;
 
-    public BuyTransaction() {
+    public Buy() {
     }
 
-    public BuyTransaction(long buyId, int date, int time, int sumOfPrice, List<DetailedBuyTransaction> detailedBuyTransactions) {
+    public Buy(long buyId, int date, int time, int sumOfPrice, List<BuyDetail> buyDetails) {
         this.buyId = buyId;
         this.date = date;
         this.time = time;
         this.sumOfPrice = sumOfPrice;
-        this.detailedBuyTransactions = detailedBuyTransactions;
+        this.buyDetails = buyDetails;
     }
 
     public long getBuyId() {
@@ -63,11 +62,11 @@ public class BuyTransaction implements Serializable {
         this.sumOfPrice = sumOfPrice;
     }
 
-    public List<DetailedBuyTransaction> getDetailedBuyTransaction() {
-        return detailedBuyTransactions;
+    public List<BuyDetail> getBuyDetails() {
+        return buyDetails;
     }
 
-    public void setDetailedBuyTransaction(List<DetailedBuyTransaction> detailedBuyTransactions) {
-        this.detailedBuyTransactions = detailedBuyTransactions;
+    public void setBuyDetails(List<BuyDetail> buyDetails) {
+        this.buyDetails = buyDetails;
     }
 }

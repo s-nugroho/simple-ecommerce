@@ -1,16 +1,15 @@
 package com.practice.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-public class DetailedBuyTransaction implements Serializable {
+public class BuyDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long detailedBuyId;
+    private long buyDetailId;
     private int amount;
     private int buyPrice;
 
@@ -20,25 +19,21 @@ public class DetailedBuyTransaction implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "buyId")
     @JsonBackReference
-    private BuyTransaction buyTransaction;
+    private Buy buy;
 
-    public DetailedBuyTransaction() {
+    public BuyDetail() {
     }
 
-    public DetailedBuyTransaction(long detailedBuyId, int amount, int buyPrice, Goods goods, BuyTransaction buyTransaction) {
-        this.detailedBuyId = detailedBuyId;
+    public BuyDetail(long buyDetailId, int amount, int buyPrice, Goods goods, Buy buy) {
+        this.buyDetailId = buyDetailId;
         this.amount = amount;
         this.buyPrice = buyPrice;
         this.goods = goods;
-        this.buyTransaction = buyTransaction;
+        this.buy = buy;
     }
 
-    public long getDetailedBuyId() {
-        return detailedBuyId;
-    }
-
-    public void setDetailedBuyId(long detailedBuyId) {
-        this.detailedBuyId = detailedBuyId;
+    public long getBuyDetailId() {
+        return buyDetailId;
     }
 
     public int getAmount() {
@@ -65,11 +60,11 @@ public class DetailedBuyTransaction implements Serializable {
         this.goods = goods;
     }
 
-    public BuyTransaction getBuyTransaction() {
-        return buyTransaction;
+    public Buy getBuy() {
+        return buy;
     }
 
-    public void setBuyTransaction(BuyTransaction buyTransaction) {
-        this.buyTransaction = buyTransaction;
+    public void setBuy(Buy buy) {
+        this.buy = buy;
     }
 }

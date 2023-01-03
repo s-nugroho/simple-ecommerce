@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class DetailedSellTransaction implements Serializable {
+public class SellDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long detailedSellId;
+    private long sellDetailId;
     private int amount;
     private int buyPrice;
 
@@ -19,21 +19,21 @@ public class DetailedSellTransaction implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "sellId")
     @JsonBackReference
-    private SellTransaction sellTransaction;
+    private Sell sell;
 
-    public DetailedSellTransaction() {
+    public SellDetail() {
     }
 
-    public DetailedSellTransaction(long detailedSellId, int amount, int buyPrice, Goods goods, SellTransaction sellTransaction) {
-        this.detailedSellId = detailedSellId;
+    public SellDetail(long sellDetailId, int amount, int buyPrice, Goods goods, Sell sell) {
+        this.sellDetailId = sellDetailId;
         this.amount = amount;
         this.buyPrice = buyPrice;
         this.goods = goods;
-        this.sellTransaction = sellTransaction;
+        this.sell = sell;
     }
 
-    public long getDetailedSellId() {
-        return detailedSellId;
+    public long getSellDetailId() {
+        return sellDetailId;
     }
 
     public int getAmount() {
@@ -60,11 +60,11 @@ public class DetailedSellTransaction implements Serializable {
         this.goods = goods;
     }
 
-    public SellTransaction getSellTransaction() {
-        return sellTransaction;
+    public Sell getSell() {
+        return sell;
     }
 
-    public void setSellTransaction(SellTransaction sellTransaction) {
-        this.sellTransaction = sellTransaction;
+    public void setSell(Sell sell) {
+        this.sell = sell;
     }
 }
