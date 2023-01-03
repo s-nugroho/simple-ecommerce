@@ -1,16 +1,15 @@
 package com.practice.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-public class DetailedBuyTransaction implements Serializable {
+public class DetailedSellTransaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long detailedBuyId;
+    private long detailedSellId;
     private int amount;
     private int buyPrice;
 
@@ -18,27 +17,23 @@ public class DetailedBuyTransaction implements Serializable {
     private Goods goods;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "buyId")
+    @JoinColumn(referencedColumnName = "sellId")
     @JsonBackReference
-    private BuyTransaction buyTransaction;
+    private SellTransaction sellTransaction;
 
-    public DetailedBuyTransaction() {
+    public DetailedSellTransaction() {
     }
 
-    public DetailedBuyTransaction(long detailedBuyId, int amount, int buyPrice, Goods goods, BuyTransaction buyTransaction) {
-        this.detailedBuyId = detailedBuyId;
+    public DetailedSellTransaction(long detailedSellId, int amount, int buyPrice, Goods goods, SellTransaction sellTransaction) {
+        this.detailedSellId = detailedSellId;
         this.amount = amount;
         this.buyPrice = buyPrice;
         this.goods = goods;
-        this.buyTransaction = buyTransaction;
+        this.sellTransaction = sellTransaction;
     }
 
-    public long getDetailedBuyId() {
-        return detailedBuyId;
-    }
-
-    public void setDetailedBuyId(long detailedBuyId) {
-        this.detailedBuyId = detailedBuyId;
+    public long getDetailedSellId() {
+        return detailedSellId;
     }
 
     public int getAmount() {
@@ -65,11 +60,11 @@ public class DetailedBuyTransaction implements Serializable {
         this.goods = goods;
     }
 
-    public BuyTransaction getBuyTransaction() {
-        return buyTransaction;
+    public SellTransaction getSellTransaction() {
+        return sellTransaction;
     }
 
-    public void setBuyTransaction(BuyTransaction buyTransaction) {
-        this.buyTransaction = buyTransaction;
+    public void setSellTransaction(SellTransaction sellTransaction) {
+        this.sellTransaction = sellTransaction;
     }
 }
