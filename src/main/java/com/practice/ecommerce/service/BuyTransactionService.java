@@ -28,4 +28,8 @@ public class BuyTransactionService {
         buyTransactionRepository.save(buyTransaction);
         return buyTransaction;
     }
+
+    public Iterable<BuyTransaction> findAllBuyTransaction(){
+        return buyTransactionRepository.findAll();
+    }
 }

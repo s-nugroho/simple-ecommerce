@@ -13,10 +13,10 @@ public class DetailedSellTransaction implements Serializable {
     private int amount;
     private int buyPrice;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Goods goods;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "sellId")
     @JsonBackReference
     private SellTransaction sellTransaction;

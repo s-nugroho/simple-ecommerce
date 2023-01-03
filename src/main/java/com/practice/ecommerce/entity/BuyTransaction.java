@@ -16,7 +16,7 @@ public class BuyTransaction implements Serializable {
     private int time;
     private int sumOfPrice;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyTransaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "buyTransaction", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<DetailedBuyTransaction> detailedBuyTransactions;
 
