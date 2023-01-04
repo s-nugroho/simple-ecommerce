@@ -1,6 +1,7 @@
 package com.practice.ecommerce.service;
 
 import com.practice.ecommerce.dao.SellRepository;
+import com.practice.ecommerce.entity.Goods;
 import com.practice.ecommerce.entity.SellDetail;
 import com.practice.ecommerce.entity.Sell;
 import jakarta.transaction.Transactional;
@@ -13,9 +14,18 @@ public class SellService {
     @Autowired
     SellRepository sellRepository;
 
-    public Sell saveSellTransaction(Sell sell){
+    @Autowired
+    GoodsService goodsService;
+
+    public Sell saveSell(Sell sell){
         for (SellDetail sellDetail : sell.getSellDetails()){
             sellDetail.setSell(sell);
+
+            //add some business process to update stock goods
+            Goods goods = sellDetail.getGoods();
+            goods.setStock(goods.getStock() - sellDetail.getAmount());
+
+            goodsService.updateGoods(goods);
         }
         sell.setSellDetails(sell.getSellDetails());
         return sellRepository.save(sell);

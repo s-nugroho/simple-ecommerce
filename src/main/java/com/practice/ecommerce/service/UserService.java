@@ -1,7 +1,7 @@
 package com.practice.ecommerce.service;
 
-import com.practice.ecommerce.dao.AdminRepository;
-import com.practice.ecommerce.entity.Admin;
+import com.practice.ecommerce.dao.UserRepository;
+import com.practice.ecommerce.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceUnit;
@@ -12,24 +12,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
-public class AdminService {
+public class UserService {
     @PersistenceUnit
     private EntityManagerFactory emf;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
-    public Admin saveAdmin(Admin admin){
-        return adminRepository.save(admin);
+    public User saveUser(User user){
+        return userRepository.save(user);
     }
 
-    public Iterable<Admin> findAllAdmin(){
-        return adminRepository.findAll();
+    public Iterable<User> findAllUser(){
+        return userRepository.findAll();
     }
 
-    public Admin findAdminById(long id){
+    public User findUserById(long id){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Admin> query = em.createQuery("SELECT a FROM Admin a WHERE a.idAdmin=:id", Admin.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userId=:id", User.class);
         query.setParameter("id",id);
         return query.getSingleResult();
     }

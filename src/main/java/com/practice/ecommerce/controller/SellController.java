@@ -13,7 +13,7 @@ public class SellController {
 
     @PostMapping
     public Sell save(@RequestBody Sell sell){
-        return sellService.saveSellTransaction(sell);
+        return sellService.saveSell(sell);
     }
 
     @GetMapping

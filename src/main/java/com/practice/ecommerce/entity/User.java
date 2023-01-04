@@ -8,28 +8,28 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Admin implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idAdmin;
+    private long userId;
     private String username;
     private String password;
 
-    public Admin() {
+    public User() {
     }
 
-    public Admin(long idAdmin, String username, String password) {
-        this.idAdmin = idAdmin;
+    public User(long userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public long getIdAdmin() {
-        return idAdmin;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setIdAdmin(long idAdmin) {
-        this.idAdmin = idAdmin;
+    public void setUserId(long idAdmin) {
+        this.userId = idAdmin;
     }
 
     public String getUsername() {
