@@ -9,31 +9,31 @@ import java.io.Serializable;
 public class BuyDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long buyDetailId;
+    private long id;
     private int amount;
-    private int buyPrice;
+    private int price;
 
     @OneToOne
-    private Goods goods;
+    private Goods good;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "buyId")
+    @JoinColumn(referencedColumnName = "id")
     @JsonBackReference
     private Buy buy;
 
     public BuyDetail() {
     }
 
-    public BuyDetail(long buyDetailId, int amount, int buyPrice, Goods goods, Buy buy) {
-        this.buyDetailId = buyDetailId;
+    public BuyDetail(long id, int amount, int price, Goods good, Buy buy) {
+        this.id = id;
         this.amount = amount;
-        this.buyPrice = buyPrice;
-        this.goods = goods;
+        this.price = price;
+        this.good = good;
         this.buy = buy;
     }
 
-    public long getBuyDetailId() {
-        return buyDetailId;
+    public long getId() {
+        return id;
     }
 
     public int getAmount() {
@@ -44,20 +44,20 @@ public class BuyDetail implements Serializable {
         this.amount = amount;
     }
 
-    public int getBuyPrice() {
-        return buyPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public void setBuyPrice(int buyPrice) {
-        this.buyPrice = buyPrice;
+    public void setPrice(int buyPrice) {
+        this.price = buyPrice;
     }
 
-    public Goods getGoods() {
-        return goods;
+    public Goods getGood() {
+        return good;
     }
 
-    public void setGoods(Goods goods) {
-        this.goods = goods;
+    public void setGood(Goods goods) {
+        this.good = goods;
     }
 
     public Buy getBuy() {

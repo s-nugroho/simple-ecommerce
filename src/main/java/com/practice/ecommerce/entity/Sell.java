@@ -10,7 +10,7 @@ import java.util.List;
 public class Sell implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long sellId;
+    private long id;
     private int date;
     private int time;
     private int sumOfPrice;
@@ -22,20 +22,20 @@ public class Sell implements Serializable {
     public Sell() {
     }
 
-    public Sell(long sellId, int date, int time, int sumOfPrice, List<SellDetail> sellDetails) {
-        this.sellId = sellId;
+    public Sell(long id, int date, int time, int sumOfPrice, List<SellDetail> sellDetails) {
+        this.id = id;
         this.date = date;
         this.time = time;
         this.sumOfPrice = sumOfPrice;
         this.sellDetails = sellDetails;
     }
 
-    public long getSellId() {
-        return sellId;
+    public long getId() {
+        return id;
     }
 
-    public void setSellId(long sellId) {
-        this.sellId = sellId;
+    public void setId(long sellId) {
+        this.id = sellId;
     }
 
     public int getDate() {

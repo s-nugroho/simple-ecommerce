@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class Goods implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long goodsId;
-    private String goodsName;
+    private long id;
+    private String name;
     private int buyPrice;
     private int sellPrice;
     private int stock;
@@ -20,24 +20,24 @@ public class Goods implements Serializable {
     public Goods() {
     }
 
-    public Goods(long goodsId, String goodsName, int buyPrice, int sellPrice, int stock) {
-        this.goodsId = goodsId;
-        this.goodsName = goodsName;
+    public Goods(long id, String name, int buyPrice, int sellPrice, int stock) {
+        this.id = id;
+        this.name = name;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
         this.stock = stock;
     }
 
-    public long getGoodsId() {
-        return goodsId;
+    public long getId() {
+        return id;
     }
 
-    public String getGoodsName() {
-        return goodsName;
+    public String getName() {
+        return name;
     }
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
+    public void setName(String goodsName) {
+        this.name = goodsName;
     }
 
     public int getBuyPrice() {

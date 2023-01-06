@@ -29,7 +29,7 @@ public class UserService {
 
     public User findUserById(long id){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userId=:id", User.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.id =:id", User.class);
         query.setParameter("id",id);
         return query.getSingleResult();
     }

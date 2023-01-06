@@ -11,25 +11,25 @@ import java.io.Serializable;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private long id;
     private String username;
     private String password;
 
     public User() {
     }
 
-    public User(long userId, String username, String password) {
-        this.userId = userId;
+    public User(long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public long getUserId() {
-        return userId;
+    public long getId() {
+        return id;
     }
 
-    public void setUserId(long idAdmin) {
-        this.userId = idAdmin;
+    public void setId(long idAdmin) {
+        this.id = idAdmin;
     }
 
     public String getUsername() {

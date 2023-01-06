@@ -22,10 +22,10 @@ public class SellService {
             sellDetail.setSell(sell);
 
             //add some business process to update stock goods
-            Goods goods = sellDetail.getGoods();
-            goods.setStock(goods.getStock() - sellDetail.getAmount());
+            Goods good = sellDetail.getGood();
+            good.setStock(good.getStock() - sellDetail.getAmount());
 
-            goodsService.updateGoods(goods);
+            goodsService.updateGoods(good);
         }
         sell.setSellDetails(sell.getSellDetails());
         return sellRepository.save(sell);
