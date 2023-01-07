@@ -28,7 +28,7 @@ public class GoodsService {
 
     public Goods findGoodsById(long id){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Goods> query = em.createQuery("SELECT g FROM Goods g WHERE g.id=:id", Goods.class);
+        TypedQuery<Goods> query = em.createQuery("SELECT g FROM Goods g WHERE g.id =:id", Goods.class);
         query.setParameter("id",id);
         return query.getSingleResult();
     }

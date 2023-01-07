@@ -2,7 +2,6 @@ package com.practice.ecommerce.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
