@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SellService {
@@ -31,7 +33,7 @@ public class SellService {
         return sellRepository.save(sell);
     }
 
-    public Iterable<Sell> findAllSell(){
+    public List<Sell> findAllSell(){
         return sellRepository.findAll();
     }
 }

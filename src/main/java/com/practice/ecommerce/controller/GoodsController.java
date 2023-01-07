@@ -5,6 +5,8 @@ import com.practice.ecommerce.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/goods")
 public class GoodsController {
@@ -17,7 +19,7 @@ public class GoodsController {
     }
 
     @GetMapping
-    public Iterable<Goods> findAll(){
+    public List<Goods> findAll(){
         return goodsService.findAllGoods();
     }
 

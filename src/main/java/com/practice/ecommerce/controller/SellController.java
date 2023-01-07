@@ -5,6 +5,8 @@ import com.practice.ecommerce.service.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/sell")
 public class SellController {
@@ -17,7 +19,7 @@ public class SellController {
     }
 
     @GetMapping
-    public Iterable<Sell> findAll(){
+    public List<Sell> findAll(){
         return sellService.findAllSell();
     }
 }

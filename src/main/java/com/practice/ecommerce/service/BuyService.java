@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @Transactional
@@ -41,7 +42,7 @@ public class BuyService {
         return buy;
     }
 
-    public Iterable<Buy> findAllBuy(){
+    public List<Buy> findAllBuy(){
         return buyRepository.findAll();
     }
 }

@@ -5,6 +5,8 @@ import com.practice.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/admin")
 public class UserController {
@@ -17,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Iterable<User> findAll(){
+    public List<User> findAll(){
         return userService.findAllUser();
     }
 

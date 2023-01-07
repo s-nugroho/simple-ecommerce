@@ -5,6 +5,8 @@ import com.practice.ecommerce.service.BuyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/buy")
 public class BuyController {
@@ -17,7 +19,7 @@ public class BuyController {
     }
 
     @GetMapping
-    public Iterable<Buy> findAll(){
+    public List<Buy> findAll(){
         return buyService.findAllBuy();
     }
 }
