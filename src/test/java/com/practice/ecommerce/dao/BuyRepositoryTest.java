@@ -3,21 +3,27 @@ package com.practice.ecommerce.dao;
 import com.practice.ecommerce.entity.Buy;
 import com.practice.ecommerce.entity.BuyDetail;
 import com.practice.ecommerce.entity.Goods;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BuyRepositoryTest {
     @Autowired
     BuyRepository repository;
+
+    @Autowired
+    GoodsRepository goodsRepository;
+
     @Test
+    @Order(1)
     void save(){
         Goods good = getGood();
         Buy buy = getBuy();
@@ -27,23 +33,20 @@ public class BuyRepositoryTest {
         buyDetails.get(0).setGood(good);
         buyDetails.get(0).setBuy(buy);
 
-
         buy.setBuyDetails(buyDetails);
-
-        var verify = repository.save(buy);
-        Assertions.assertNotNull(verify);
+        Assertions.assertNotNull(repository.save(buy));
     }
 
     @Test
+    @Order(3)
     void findAll(){
-        List<Buy> buys = repository.findAll();
-        Assertions.assertEquals(buys.size(),2);
+        Assertions.assertEquals(repository.findAll().size(),1);
     }
 
     @Test
+    @Order(2)
     void findOne(){
-        var verify = repository.findById(2L);
-        Assertions.assertNotNull(verify);
+        Assertions.assertNotNull(repository.findById(1L));
     }
 
     private Goods getGood(){
@@ -69,5 +72,10 @@ public class BuyRepositoryTest {
         buy.setTime(3);
         buy.setSumOfPrice(300);
         return buy;
+    }
+
+    @BeforeAll
+    public void run(){
+        goodsRepository.save(getGood());
     }
 }
