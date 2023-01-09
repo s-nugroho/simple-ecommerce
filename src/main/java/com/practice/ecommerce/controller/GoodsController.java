@@ -6,25 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/goods")
 public class GoodsController {
     @Autowired
-    private GoodsService goodsService;
+    private GoodsService service;
 
     @PostMapping
     public Goods save(@RequestBody Goods goods){
-        return goodsService.saveGoods(goods);
+        return service.save(goods);
     }
 
     @GetMapping
     public List<Goods> findAll(){
-        return goodsService.findAllGoods();
+        return service.findAll();
     }
 
     @GetMapping("search/{id}")
-    public Goods findById(@PathVariable("id") long id){
-        return goodsService.findGoodsById(id);
+    public Optional<Goods> findById(@PathVariable("id") long id){
+        return service.findById(id);
     }
 }

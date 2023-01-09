@@ -16,20 +16,20 @@ public class GoodsServiceTest {
     @Test
     void save(){
         Goods goods = new Goods(1,"Sprite",100,300,10);
-        goodsService.saveGoods(goods);
-        var verify = goodsService.findGoodsById(4);
+        goodsService.save(goods);
+        var verify = goodsService.findById(4);
         Assertions.assertNotNull(verify);
     }
 
     @Test
     void find(){
-        var verify = goodsService.findGoodsById(4);
+        var verify = goodsService.findById(4);
         Assertions.assertNotNull(verify);
     }
 
     @Test
     void findAll(){
-        var verify = goodsService.findAllGoods();
+        var verify = goodsService.findAll();
         Assertions.assertNotNull(verify);
     }
 }

@@ -6,30 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("api/admin")
+@RequestMapping("api/user")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService service;
 
     @PostMapping
     public User save(@RequestBody User user){
-        return userService.saveUser(user);
+        return service.save(user);
     }
 
     @GetMapping
     public List<User> findAll(){
-        return userService.findAllUser();
+        return service.findAll();
     }
 
     @PutMapping
-    public User deleteAdmin(@RequestBody User user){
-        return userService.saveUser(user);
+    public User delete(@RequestBody User user){
+        return service.save(user);
     }
 
     @GetMapping("search/{id}")
-    public User findAdminById(@PathVariable("id") Long id){
-        return userService.findUserById(id);
+    public Optional<User> findById(@PathVariable("id") Long id){
+        return service.findById(id);
     }
 }

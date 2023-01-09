@@ -1,25 +1,26 @@
 package com.practice.ecommerce.service;
 
+import com.practice.ecommerce.dao.GoodsRepository;
 import com.practice.ecommerce.dao.SellRepository;
 import com.practice.ecommerce.entity.Goods;
 import com.practice.ecommerce.entity.SellDetail;
 import com.practice.ecommerce.entity.Sell;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 public class SellService {
     @Autowired
-    SellRepository sellRepository;
+    private SellRepository sellRepository;
 
     @Autowired
-    GoodsService goodsService;
+    private GoodsRepository goodsRepository;
 
-    public Sell saveSell(Sell sell){
+    @Transactional(readOnly = false)
+    public Sell save(Sell sell){
         for (SellDetail sellDetail : sell.getSellDetails()){
             sellDetail.setSell(sell);
 
@@ -27,13 +28,14 @@ public class SellService {
             Goods good = sellDetail.getGood();
             good.setStock(good.getStock() - sellDetail.getAmount());
 
-            goodsService.updateGoods(good);
+            goodsRepository.save(good);
         }
         sell.setSellDetails(sell.getSellDetails());
         return sellRepository.save(sell);
     }
 
-    public List<Sell> findAllSell(){
+    @Transactional(readOnly = true)
+    public List<Sell> findAll(){
         return sellRepository.findAll();
     }
 }

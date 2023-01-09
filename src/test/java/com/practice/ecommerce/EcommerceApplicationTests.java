@@ -1,7 +1,6 @@
 package com.practice.ecommerce;
 
 import com.practice.ecommerce.dao.UserRepository;
-import com.practice.ecommerce.entity.BuyDetail;
 import com.practice.ecommerce.entity.User;
 import com.practice.ecommerce.service.UserService;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ class EcommerceApplicationTests {
 
 	@Test
 	void Save() {
-		var service = userService.saveUser(new User(1,"user1","user1"));
+		var service = userService.save(new User(1,"user1","user1"));
 //		Assertions.assertSame(service,user1);
 		Assertions.assertEquals(service,user);
 	}

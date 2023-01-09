@@ -11,15 +11,15 @@ import java.util.List;
 @RequestMapping("api/sell")
 public class SellController {
     @Autowired
-    private SellService sellService;
+    private SellService service;
 
     @PostMapping
     public Sell save(@RequestBody Sell sell){
-        return sellService.saveSell(sell);
+        return service.save(sell);
     }
 
     @GetMapping
     public List<Sell> findAll(){
-        return sellService.findAllSell();
+        return service.findAll();
     }
 }

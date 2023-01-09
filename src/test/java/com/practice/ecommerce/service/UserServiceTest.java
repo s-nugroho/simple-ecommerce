@@ -13,19 +13,19 @@ public class UserServiceTest {
     @Test
     void save(){
         User user = new User(1,"user1","user2");
-        var verify = userService.saveUser(user);
+        var verify = userService.save(user);
         Assertions.assertNotNull(verify);
     }
 
     @Test
     void find(){
-        var verify = userService.findAllUser();
+        var verify = userService.findAll();
         Assertions.assertNotNull(verify);
     }
 
     @Test
     void findOne(){
-        var verify = userService.findUserById(1);
+        var verify = userService.findById(1);
         Assertions.assertNotNull(verify);
     }
 }

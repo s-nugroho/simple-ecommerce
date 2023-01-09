@@ -1,48 +1,53 @@
 package com.practice.ecommerce.service;
 
 import com.practice.ecommerce.dao.BuyRepository;
+import com.practice.ecommerce.dao.GoodsRepository;
 import com.practice.ecommerce.entity.Buy;
 import com.practice.ecommerce.entity.BuyDetail;
 import com.practice.ecommerce.entity.Goods;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.PersistenceUnit;
-import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@Transactional
 public class BuyService {
-    @PersistenceUnit
-    EntityManagerFactory emf;
+    @Autowired
+    private GoodsRepository goodsRepository;
 
     @Autowired
-    GoodsService goodsService;
+    private BuyRepository buyRepository;
 
-    @Autowired
-    BuyRepository buyRepository;
-
-    public Buy saveBuy(Buy buy){
+    @Transactional(readOnly = false)
+    public Buy save(Buy buy){
 
         for (BuyDetail buyDetail : buy.getBuyDetails()){
             buyDetail.setBuy(buy);
 
             //add some business process to update stock goods
-            Goods good = buyDetail.getGood();
+            Goods good = buyDetail.getGood();//weakness : stock doesn't read from db but from the request body
             good.setStock(good.getStock() + buyDetail.getAmount());
 
-            goodsService.saveGoods(good);
+//            Goods goods1 = goodsRepository.findById(buyDetail.getId());
+//            good.setStock(good.getStock()+goods1.getStock());
+
+            goodsRepository.save(good);
         }
 
         buy.setBuyDetails(buy.getBuyDetails());
         buyRepository.save(buy);
         return buy;
     }
-
-    public List<Buy> findAllBuy(){
+    @Transactional(readOnly = true)
+    public List<Buy> findAll(){
         return buyRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Buy> findById(long id){
+        return buyRepository.findById(id);
     }
 }
