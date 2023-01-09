@@ -9,14 +9,14 @@ import java.io.Serializable;
 public class SellDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long sellDetailId;
+    private long id;
     private int amount;
     private int price;
 
     @OneToOne
     private Goods good;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(referencedColumnName = "id")
     @JsonBackReference
     private Sell sell;
@@ -24,16 +24,20 @@ public class SellDetail implements Serializable {
     public SellDetail() {
     }
 
-    public SellDetail(long sellDetailId, int amount, int price, Goods good, Sell sell) {
-        this.sellDetailId = sellDetailId;
+    public SellDetail(long id, int amount, int price, Goods good, Sell sell) {
+        this.id = id;
         this.amount = amount;
         this.price = price;
         this.good = good;
         this.sell = sell;
     }
 
-    public long getSellDetailId() {
-        return sellDetailId;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public int getAmount() {

@@ -15,15 +15,21 @@ public class GoodsRepositoryTest {
     GoodsRepository goodsRepository;
     @Test
     void save(){
-        Goods goods = new Goods(1,"",100,200,10);
+        Goods goods = new Goods(1,"Sprite",100,200,10);
         var save = goodsRepository.save(goods);
         Assertions.assertNotNull(save);
     }
 
     @Test
-    void find(){
+    void findAll(){
         var find = goodsRepository.findAll();
         Assertions.assertNotNull(find);
+    }
+
+    @Test
+    void findOne(){
+        var verify = goodsRepository.findById(1L);
+        Assertions.assertNotNull(verify);
     }
 
     @Test
