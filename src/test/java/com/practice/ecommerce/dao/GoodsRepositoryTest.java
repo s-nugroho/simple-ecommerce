@@ -1,41 +1,48 @@
 package com.practice.ecommerce.dao;
 
 import com.practice.ecommerce.entity.Goods;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GoodsRepositoryTest {
-
     @Autowired
-    GoodsRepository goodsRepository;
+    GoodsRepository repository;
     @Test
+    @Order(1)
     void save(){
-        Goods goods = new Goods(1,"Sprite",100,200,10);
-        var save = goodsRepository.save(goods);
-        Assertions.assertNotNull(save);
+        Assertions.assertNotNull(repository.save(getGood()));
     }
 
     @Test
+    @Order(2)
     void findAll(){
-        var find = goodsRepository.findAll();
-        Assertions.assertNotNull(find);
+        Assertions.assertEquals(repository.findAll().size(),1);
     }
 
     @Test
+    @Order(3)
     void findOne(){
-        var verify = goodsRepository.findById(1L);
-        Assertions.assertNotNull(verify);
+        Assertions.assertNotNull(repository.findById(1L));
     }
 
     @Test
     void delete(){
-        goodsRepository.deleteById(3L);
-//        var findDeleted = goodsRepository.findById(1L);
-        assertThat(goodsRepository.count()).isEqualTo(0);
+        repository.deleteById(1L);
+        Assertions.assertEquals(repository.findAll().size(),0);
+    }
+
+    private Goods getGood(){
+        Goods good = new Goods();
+        good.setId(1);
+        good.setName("Sprite");
+        good.setBuyPrice(100);
+        good.setSellPrice(200);
+        good.setStock(10);
+        return good;
     }
 }

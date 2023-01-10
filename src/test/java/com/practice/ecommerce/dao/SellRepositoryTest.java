@@ -3,9 +3,7 @@ package com.practice.ecommerce.dao;
 import com.practice.ecommerce.entity.Goods;
 import com.practice.ecommerce.entity.Sell;
 import com.practice.ecommerce.entity.SellDetail;
-import org.hibernate.sql.ast.tree.expression.Over;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,12 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SellRepositoryTest {
 
     @Autowired
-    SellRepository sellRepository;
+    private SellRepository repository;
+
+    @Autowired
+    private GoodsRepository goodsRepository;
 
     @Test
+    @Order(1)
     void save(){
         Goods good = getGood();
         List<SellDetail> sellDetails = new ArrayList<>();
@@ -29,14 +33,26 @@ public class SellRepositoryTest {
         sellDetails.get(0).setSell(sell);
 
         sell.setSellDetails(sellDetails);
-        var verify = sellRepository.save(sell);
-        Assertions.assertNotNull(verify);
+        Assertions.assertNotNull(repository.save(sell));
     }
 
     @Test
+    @Order(2)
     void findAll(){
-        var verify = sellRepository.findAll().size();
-        Assertions.assertEquals(verify,2);
+        Assertions.assertEquals(repository.findAll().size(),1);
+    }
+
+    @Test
+    @Order(3)
+    void findOne(){
+        Assertions.assertNotNull(repository.findById(1L));
+    }
+
+    @Test
+    @Order(4)
+    void delete(){
+        repository.deleteAll();
+        Assertions.assertEquals(repository.findAll().size(),0);
     }
 
     private Goods getGood(){
@@ -65,5 +81,13 @@ public class SellRepositoryTest {
         sell.setSumOfPrice(300);
 
         return sell;
+    }
+
+    @BeforeAll
+    public void preTest(){
+        //considering to use val 'create' on "spring.jpa.hibernate.ddl-auto= . . . "
+//        repository.deleteAll();
+//        goodsRepository.deleteAll();
+        goodsRepository.save(getGood());
     }
 }

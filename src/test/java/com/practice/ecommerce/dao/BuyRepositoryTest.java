@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 
 import java.util.ArrayList;
@@ -15,10 +16,10 @@ import java.util.List;
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//@DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
 public class BuyRepositoryTest {
     @Autowired
     BuyRepository repository;
-
     @Autowired
     GoodsRepository goodsRepository;
 
@@ -75,7 +76,10 @@ public class BuyRepositoryTest {
     }
 
     @BeforeAll
-    public void run(){
+    public void preTest(){
+        //considering to use val 'create' on "spring.jpa.hibernate.ddl-auto= . . . "
+//        repository.deleteAll();
+//        goodsRepository.deleteAll();
         goodsRepository.save(getGood());
     }
 }
