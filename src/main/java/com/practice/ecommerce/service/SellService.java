@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SellService {
@@ -37,5 +38,10 @@ public class SellService {
     @Transactional(readOnly = true)
     public List<Sell> findAll(){
         return sellRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Sell> findOne(Long id){
+        return sellRepository.findById(id);
     }
 }

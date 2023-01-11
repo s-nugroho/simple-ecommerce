@@ -1,35 +1,42 @@
 package com.practice.ecommerce.service;
 
 import com.practice.ecommerce.entity.Goods;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GoodsServiceTest {
     @Autowired
-    GoodsService goodsService;
+    GoodsService service;
 
     @Test
+    @Order(1)
     void save(){
-        Goods goods = new Goods(1,"Sprite",100,300,10);
-        goodsService.save(goods);
-        var verify = goodsService.findById(4);
-        Assertions.assertNotNull(verify);
+        Assertions.assertNotNull(service.save(getGood()));
     }
 
     @Test
-    void find(){
-        var verify = goodsService.findById(4);
-        Assertions.assertNotNull(verify);
+    @Order(2)
+    void findOne(){
+        Assertions.assertNotNull(service.findById(1));
     }
 
     @Test
     void findAll(){
-        var verify = goodsService.findAll();
-        Assertions.assertNotNull(verify);
+        service.save(getGood());
+        Assertions.assertEquals(service.findAll().stream().count(),2);
+    }
+
+    private Goods getGood(){
+        Goods good = new Goods();
+        good.setName("Sprite");
+        good.setBuyPrice(100);
+        good.setSellPrice(200);
+        good.setStock(10);
+        return good;
     }
 }
