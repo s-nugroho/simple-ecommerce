@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PutMapping
-    public User delete(@RequestBody User user){
+    public User update(@RequestBody User user){
         return service.save(user);
     }
 
